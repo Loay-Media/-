@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>البيت السوري | The Syrian House</title>
+    <title>البيت السوري | الطعم الشامي الأصلي</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -12,88 +12,166 @@
 </head>
 <body>
 
-    <div class="bg-animation"></div>
+    <div id="ripple-screen"></div>
 
-    <button id="cart-fab" class="cart-fab hidden" onclick="app.openCart()">
+    <button id="cart-fab" class="hidden" onclick="app.openCart()">
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="cart-count">0</span>
     </button>
 
-    <section id="welcome-screen" class="screen active">
-        <div class="welcome-content 3d-tilt">
+    <section id="welcome-screen" class="active">
+        <div class="welcome-bg-pattern">
+            <i class="fa-solid fa-pizza-slice float-icon i-1"></i>
+            <i class="fa-solid fa-pepper-hot float-icon i-2"></i>
+            <i class="fa-solid fa-leaf float-icon i-3"></i>
+            <i class="fa-solid fa-burger float-icon i-4"></i>
+        </div>
+        
+        <div class="welcome-content glass-card">
             <h1 class="logo-text">البيت السوري</h1>
-            <p class="tagline">نورت البيت السوري يا فندم! أصل الطعم الشامي عندنا وبس.</p>
-            <button class="btn-primary pulse" onclick="app.navigate('home')">
-                <i class="fa-solid fa-utensils"></i> شوف المنيو
+            <h2 class="sub-logo">أصل الطعم الشامي في مصر!</h2>
+            
+            <div class="facts-container">
+                <span class="fact-badge"><i class="fa-solid fa-calendar-check"></i> مفتوح منذ 1998</span>
+                <span class="fact-badge"><i class="fa-solid fa-fire-burner"></i> تسوية على الحطب</span>
+                <span class="fact-badge"><i class="fa-solid fa-medal"></i> لحوم بلدي 100%</span>
+            </div>
+
+            <p class="desc-text">عشان بنهتم بكل تفصيلة، جبنالك الطعم الأصلي من قلب الشام لحد عندك. جرب عجينتنا الهشة وتتبيلتنا السرية اللي مش هتلاقيها في أي مكان تاني.</p>
+
+            <div class="button-group">
+                <button class="btn-secondary" onclick="app.showModal('faq-modal')">
+                    <i class="fa-solid fa-circle-question"></i> الأسئلة الشائعة
+                </button>
+                <button class="btn-secondary" onclick="app.showModal('numbers-modal')">
+                    <i class="fa-solid fa-phone-volume"></i> أرقام الخدمة
+                </button>
+            </div>
+
+            <button class="btn-liquid pulse" onclick="app.transitionToMenu()">
+                <span>استكشف المنيو</span> <i class="fa-solid fa-arrow-left"></i>
             </button>
         </div>
     </section>
 
-    <section id="home-screen" class="screen hidden">
-        <div class="header">
-            <h2>اختار اللي نفسك فيه</h2>
-        </div>
-        <div id="categories-grid" class="grid-container">
+    <section id="menu-screen" class="hidden">
+        
+        <nav class="sticky-nav">
+            <div class="nav-container">
+                <a href="#sec-pizza" class="nav-tab active-tab">البيتزا</a>
+                <a href="#sec-shawerma" class="nav-tab">الشاورما</a>
+                <a href="#sec-appetizers" class="nav-tab">المقبلات</a>
+                <a href="#sec-sweet" class="nav-tab">الحلو</a>
             </div>
-    </section>
+        </nav>
 
-    <section id="category-screen" class="screen hidden">
-        <div class="header">
-            <button class="btn-back" onclick="app.navigate('home')"><i class="fa-solid fa-arrow-right"></i> رجوع</button>
-            <h2 id="category-title">الركن</h2>
-        </div>
-        <div id="items-grid" class="grid-container">
+        <div class="menu-container">
+            
+            <div id="sec-pizza" class="menu-section scroll-reveal">
+                <div class="section-header">
+                    <h2>ركن البيتزا <i class="fa-solid fa-pizza-slice text-orange"></i></h2>
+                    <p>عجينة إيطالي بلمسة سورية، بتستوي على نار الحطب عشان تاخد القرمشة الصح.</p>
+                </div>
+                <div class="items-grid" id="grid-pizza">
+                    </div>
             </div>
+
+            <div id="sec-shawerma" class="menu-section scroll-reveal">
+                <div class="section-header">
+                    <h2>ركن الشاورما <i class="fa-solid fa-fire text-orange"></i></h2>
+                    <p>سيخ الشاورما بتاعنا متبل بـ 14 بهار شامي أصلي، متعة في كل قطمة.</p>
+                </div>
+                <div class="items-grid" id="grid-shawerma">
+                    </div>
+            </div>
+
+            <div id="sec-appetizers" class="menu-section scroll-reveal">
+                <div class="section-header">
+                    <h2>المقبلات والإضافات <i class="fa-solid fa-bowl-food text-orange"></i></h2>
+                    <p>الحبشتكنات اللي بتظبط الأكلة، من التومية لحد البطاطس السوري.</p>
+                </div>
+                <div class="items-grid" id="grid-appetizers">
+                    </div>
+            </div>
+
+            <div id="sec-sweet" class="menu-section scroll-reveal">
+                <div class="section-header">
+                    <h2>ركن الحلو <i class="fa-solid fa-ice-cream text-orange"></i></h2>
+                    <p>حلي بقك بعد الأكلة التمام بأحلى حلويات شامية بالسمن البلدي.</p>
+                </div>
+                <div class="items-grid" id="grid-sweet">
+                    </div>
+            </div>
+
+        </div>
     </section>
 
     <div id="cart-modal" class="modal-overlay hidden">
-        <div class="modal-content glass-card">
-            <button class="close-btn" onclick="app.closeCart()"><i class="fa-solid fa-xmark"></i></button>
-            <h2>سلة الطلبات</h2>
-            <div id="cart-items" class="cart-items-list">
+        <div class="modal-content wide-modal scale-in">
+            <button class="close-btn" onclick="app.closeModal('cart-modal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="checkout-layout">
+                <div class="checkout-summary">
+                    <h2>سلة الطلبات <i class="fa-solid fa-bag-shopping"></i></h2>
+                    <div id="cart-items" class="cart-items-list"></div>
+                    <div class="cart-total">
+                        الإجمالي: <span id="total-price">0</span> ج.م
+                    </div>
                 </div>
-            <div class="cart-total">
-                الإجمالي: <span id="total-price">0</span> ج.م
+                <div class="checkout-form-container">
+                    <h2>بيانات التوصيل</h2>
+                    <form id="checkout-form" onsubmit="app.submitOrder(event)">
+                        <div class="input-group">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="الاسم بالكامل" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" placeholder="رقم الموبايل" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <input type="text" placeholder="العنوان بالتفصيل (عمارة، دور، شقة)" required>
+                        </div>
+                        <div class="payment-method">
+                            <label><input type="radio" checked> <i class="fa-solid fa-money-bill-wave text-orange"></i> الدفع كاش</label>
+                        </div>
+                        <button type="submit" class="btn-liquid w-100" style="padding: 10px;">إتمام الطلب</button>
+                    </form>
+                </div>
             </div>
-            
-            <form id="checkout-form" onsubmit="app.submitOrder(event)">
-                <div class="input-group">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="الاسم بالكامل" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-phone"></i>
-                    <input type="tel" placeholder="رقم الموبايل" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" placeholder="الإيميل (اختياري)">
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <input type="text" placeholder="العنوان بالتفصيل" required>
-                </div>
-                
-                <div class="payment-method">
-                    <label>
-                        <input type="radio" checked> 
-                        <i class="fa-solid fa-money-bill-wave text-orange"></i> الدفع كاش عند الاستلام
-                    </label>
-                </div>
-                
-                <button type="submit" class="btn-primary w-100">تأكيد الطلب</button>
-            </form>
+        </div>
+    </div>
+
+    <div id="faq-modal" class="modal-overlay hidden">
+        <div class="modal-content scale-in">
+            <button class="close-btn" onclick="app.closeModal('faq-modal')"><i class="fa-solid fa-xmark"></i></button>
+            <h2>الأسئلة الشائعة</h2>
+            <ul style="text-align: right; padding: 20px; line-height: 2;">
+                <li><strong>بتوصلوا لفين؟</strong> بنوصل لجميع المناطق بحد أقصى 45 دقيقة.</li>
+                <li><strong>فيه دفع فيزا؟</strong> حالياً الدفع كاش عند الاستلام، وقريباً الدفع بالفيزا.</li>
+                <li><strong>مواعيد العمل؟</strong> شغالين 24 ساعة لخدمتكم.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="numbers-modal" class="modal-overlay hidden">
+        <div class="modal-content scale-in">
+            <button class="close-btn" onclick="app.closeModal('numbers-modal')"><i class="fa-solid fa-xmark"></i></button>
+            <h2>أرقام الخدمة</h2>
+            <div style="text-align: center; padding: 20px;">
+                <p style="font-size: 1.5rem; color: var(--orange-primary); font-weight: bold;">الخط الساخن: 19888</p>
+                <p>موبايل: 01012345678</p>
+                <p>واتساب: 01198765432</p>
+            </div>
         </div>
     </div>
 
     <div id="thank-you-popup" class="modal-overlay hidden">
         <div class="modal-content success-card scale-in">
-            <div class="success-icon">
-                <i class="fa-solid fa-check"></i>
-            </div>
+            <div class="success-icon"><i class="fa-solid fa-check"></i></div>
             <h2>ألف هنا!</h2>
-            <p>طلبك اتأكد وهيوصلك في أسرع وقت. شكراً لاختيارك البيت السوري.</p>
-            <button class="btn-primary" onclick="app.resetApp()">طلب جديد</button>
+            <p>طلبك اتأكد وهيوصلك سخن نار في أسرع وقت. شكراً لاختيارك البيت السوري.</p>
+            <button class="btn-secondary" onclick="app.resetApp()">طلب جديد</button>
         </div>
     </div>
 
