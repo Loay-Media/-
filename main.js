@@ -1,236 +1,210 @@
-// --- Data Structure (The Menu) ---
-const categories = [
-    { id: 'pizza', name: 'ركن البيتزا', icon: 'fa-pizza-slice' },
-    { id: 'shawerma', name: 'ركن السندوتشات', icon: 'fa-burger' },
-    { id: 'fatayer', name: 'ركن الفطائر', icon: 'fa-bread-slice' },
-    { id: 'manakeesh', name: 'ركن المناقيش', icon: 'fa-plate-wheat' },
-    { id: 'borak', name: 'ركن البرك', icon: 'fa-cookie' },
-    { id: 'crepe', name: 'ركن الكريب', icon: 'fa-pancake' },
-    { id: 'sweet', name: 'ركن الحلو', icon: 'fa-ice-cream' },
-    { id: 'addons', name: 'إضافات', icon: 'fa-plus' }
-];
-
-const menuItems = {
+// --- 1. DATA WITH IMAGES ---
+const menuData = {
     pizza: [
-        { id: 'p1', name: 'بيتزا مارجريتا', desc: 'جبنة موتزاريلا سايحة، عجينة هشة، صوص البيتزا الخطير', price: 50 },
-        { id: 'p2', name: 'بيتزا بيبروني', desc: 'بيبروني بقري، موتزاريلا، صوص طماطم فريش', price: 80 }
+        { id: 'p1', name: 'مارجريتا نابولي', desc: 'جبنة موتزاريلا سايحة، صوص طماطم فريش، ريحان وعجينة هشة.', price: 60, img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80' },
+        { id: 'p2', name: 'بيتزا بيبروني', desc: 'بيبروني بقري مدخن، موتزاريلا غرقانة، وزيتون أسود.', price: 85, img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&q=80' }
     ],
     shawerma: [
-        { id: 's1', name: 'شاورما سوري فراخ', desc: 'فراخ متبلة، تومية، خيار مخلل في عيش صاج', price: 45 },
-        { id: 's2', name: 'شاورما سوري لحمة', desc: 'لحمة بلدي، طحينة، بصل وبقدونس في عيش صاج', price: 55 }
+        { id: 's1', name: 'شاورما دجاج سوري', desc: 'دجاج متبل ببهارات الشام، تومية كريمي، وخيار مخلل في عيش صاج.', price: 55, img: 'https://images.unsplash.com/photo-1648902598380-007f35f793dc?w=400&q=80' },
+        { id: 's2', name: 'شاورما لحم شقف', desc: 'لحم بلدي صافي، طحينة، بصل وبقدونس متحبش.', price: 70, img: 'https://images.unsplash.com/photo-1561651823-34feb02250e4?w=400&q=80' }
     ],
-    fatayer: [
-        { id: 'f1', name: 'فطيرة مشكل جبن', desc: 'رومي، شيدر، موتزاريلا، فلفل وزيتون', price: 65 },
-        { id: 'f2', name: 'فطيرة سجق', desc: 'سجق إسكندراني مع خلطة الجبن والخضار', price: 75 }
-    ],
-    manakeesh: [
-        { id: 'm1', name: 'منقوشة زعتر', desc: 'زعتر حلبي أصلي مع زيت زيتون', price: 25 },
-        { id: 'm2', name: 'منقوشة محمرة بجبنة', desc: 'محمرة سورية حارة مع جبنة قشقوان', price: 35 }
-    ],
-    borak: [
-        { id: 'b1', name: 'برك بالجبنة', desc: 'عجينة مقرمشة محشية جبنة وحبة البركة', price: 20 },
-        { id: 'b2', name: 'برك باللحمة', desc: 'محشية لحمة مفرومة مع صنوبر', price: 30 }
-    ],
-    crepe: [
-        { id: 'c1', name: 'كريب نوتيلا', desc: 'كريب غرقان نوتيلا مع قطع موز', price: 45 },
-        { id: 'c2', name: 'كريب كرسبي', desc: 'فراخ كرسبي، بطاطس، مايونيز وموتزاريلا', price: 60 }
+    appetizers: [
+        { id: 'a1', name: 'بطاطس محمرة', desc: 'أصابع بطاطس مقرمشة مع بهارات سوري خاصة.', price: 25, img: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?w=400&q=80' },
+        { id: 'a2', name: 'علبة تومية', desc: 'تومية سوري أصلية كريمية.', price: 15, img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80' }
     ],
     sweet: [
-        { id: 'w1', name: 'كنافة نابلسية', desc: 'كنافة بالجبنة النابلسية السايحة والشربات', price: 40 },
-        { id: 'w2', name: 'بقلاوة شامي', desc: 'بقلاوة بالفستق الحلبي', price: 30 }
-    ],
-    addons: [
-        { id: 'a1', name: 'بطاطس محمرة', desc: 'بطاطس كرسبي مع بهارات سوري', price: 15 },
-        { id: 'a2', name: 'تومية اكسترا', desc: 'علبة تومية سوري أصلية', price: 10 }
+        { id: 'w1', name: 'كنافة نابلسية', desc: 'كنافة بجبنة نابلسية بتمط، غرقانة شربات وفستق.', price: 45, img: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80' }
     ]
 };
 
-// --- App State & Logic ---
+// --- 2. APP LOGIC ---
 const app = {
-    cart: {}, // { itemId: quantity }
-    currentScreen: 'welcome-screen',
+    cart: {},
 
     init() {
-        this.renderCategories();
-        this.setup3DEffect();
+        this.renderMenu();
+        this.setupScrollSpy();
+        this.setupIntersectionObserver();
     },
 
-    navigate(target, categoryId = null) {
-        // Hide all screens
-        document.querySelectorAll('.screen').forEach(s => {
-            s.classList.remove('active');
-            s.classList.add('hidden');
-        });
-
-        // Show target screen
-        const targetEl = document.getElementById(`${target}-screen`);
-        targetEl.classList.remove('hidden');
+    // Cool Water Ripple Transition
+    transitionToMenu() {
+        const ripple = document.getElementById('ripple-screen');
+        ripple.classList.add('ripple-active');
         
-        // Slight delay to allow CSS reflow for fade animation
         setTimeout(() => {
-            targetEl.classList.add('active');
-            if (target === 'welcome') {
-                targetEl.style.display = 'flex';
-            } else {
-                targetEl.style.display = 'block';
-            }
-        }, 10);
-
-        if (target === 'home') {
-            document.getElementById('cart-fab').classList.remove('hidden');
-        }
-
-        if (target === 'category' && categoryId) {
-            this.renderItems(categoryId);
-        }
-    },
-
-    renderCategories() {
-        const grid = document.getElementById('categories-grid');
-        grid.innerHTML = categories.map(cat => `
-            <div class="cat-card glass-card" onclick="app.navigate('category', '${cat.id}')">
-                <i class="fa-solid ${cat.icon} cat-icon"></i>
-                <h3>${cat.name}</h3>
-            </div>
-        `).join('');
-    },
-
-    renderItems(categoryId) {
-        const category = categories.find(c => c.id === categoryId);
-        document.getElementById('category-title').innerText = category.name;
-        
-        const items = menuItems[categoryId];
-        const grid = document.getElementById('items-grid');
-        
-        grid.innerHTML = items.map(item => {
-            const qty = this.cart[item.id] || 0;
-            const hasItem = qty > 0;
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.remove('active');
             
-            return `
-            <div class="item-card glass-card">
-                <h3>${item.name}</h3>
-                <p class="item-desc">${item.desc}</p>
-                <div class="item-price">${item.price} ج.م</div>
-                
-                <div class="action-wrap ${hasItem ? 'active' : ''}" id="wrap-${item.id}">
-                    <button class="btn-add" onclick="app.addFirst('${item.id}')">
-                        <i class="fa-solid fa-plus"></i> أضف للسلة
-                    </button>
-                    <div class="qty-control">
-                        <button onclick="app.updateQty('${item.id}', -1)">-</button>
-                        <span id="qty-${item.id}">${qty}</span>
-                        <button onclick="app.updateQty('${item.id}', 1)">+</button>
+            const menuScreen = document.getElementById('menu-screen');
+            menuScreen.classList.remove('hidden');
+            window.scrollTo(0, 0);
+            
+            // Remove ripple after transition
+            setTimeout(() => {
+                ripple.classList.remove('ripple-active');
+            }, 500);
+            
+        }, 800); // Trigger mid-animation
+    },
+
+    // Render HTML dynamically
+    renderMenu() {
+        for (const [category, items] of Object.entries(menuData)) {
+            const grid = document.getElementById(`grid-${category}`);
+            if(!grid) continue;
+            
+            grid.innerHTML = items.map(item => `
+                <div class="food-card">
+                    <img src="${item.img}" alt="${item.name}" class="food-img">
+                    <div class="food-info">
+                        <h3 class="food-title">${item.name}</h3>
+                        <p class="food-desc">${item.desc}</p>
+                        <div class="food-bottom">
+                            <span class="food-price">${item.price} ج.م</span>
+                            <div class="action-wrap" id="wrap-${item.id}">
+                                <button class="btn-add" onclick="app.addFirst('${item.id}')">أضف +</button>
+                                <div class="qty-control">
+                                    <button class="qty-btn" onclick="app.updateQty('${item.id}', -1)">-</button>
+                                    <span class="qty-num" id="qty-${item.id}">0</span>
+                                    <button class="qty-btn" onclick="app.updateQty('${item.id}', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `}).join('');
-    },
-
-    addFirst(itemId) {
-        this.cart[itemId] = 1;
-        document.getElementById(`wrap-${itemId}`).classList.add('active');
-        document.getElementById(`qty-${itemId}`).innerText = 1;
-        this.updateCartBadge();
-    },
-
-    updateQty(itemId, change) {
-        this.cart[itemId] += change;
-        
-        if (this.cart[itemId] <= 0) {
-            delete this.cart[itemId];
-            document.getElementById(`wrap-${itemId}`).classList.remove('active');
-        } else {
-            document.getElementById(`qty-${itemId}`).innerText = this.cart[itemId];
+            `).join('');
         }
-        this.updateCartBadge();
-        this.renderCartItems(); // If cart is open, update it live
     },
 
-    updateCartBadge() {
+    // Cart Interactions
+    addFirst(id) {
+        this.cart[id] = 1;
+        this.updateUI(id);
+    },
+
+    updateQty(id, change) {
+        this.cart[id] += change;
+        if (this.cart[id] <= 0) delete this.cart[id];
+        this.updateUI(id);
+        
+        // If modal is open, refresh it live
+        if(!document.getElementById('cart-modal').classList.contains('hidden')){
+            this.renderCartList();
+            if(Object.keys(this.cart).length === 0) this.closeModal('cart-modal');
+        }
+    },
+
+    updateUI(id) {
+        const wrap = document.getElementById(`wrap-${id}`);
+        const qtySpan = document.getElementById(`qty-${id}`);
+        const fab = document.getElementById('cart-fab');
+        
+        if (this.cart[id]) {
+            wrap.classList.add('active');
+            qtySpan.innerText = this.cart[id];
+        } else {
+            wrap.classList.remove('active');
+        }
+
         const totalItems = Object.values(this.cart).reduce((a, b) => a + b, 0);
         document.getElementById('cart-count').innerText = totalItems;
+        
+        if (totalItems > 0) fab.classList.remove('hidden');
+        else fab.classList.add('hidden');
     },
 
-    // --- Cart & Modal Logic ---
+    // Modals
+    showModal(modalId) {
+        document.getElementById(modalId).classList.remove('hidden');
+    },
+    closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+    },
+
     openCart() {
-        if(Object.keys(this.cart).length === 0) {
-            alert('السلة فاضية يا فندم! اختار حاجة حلوة الأول.');
-            return;
-        }
-        this.renderCartItems();
-        document.getElementById('cart-modal').classList.remove('hidden');
+        if(Object.keys(this.cart).length === 0) return;
+        this.renderCartList();
+        this.showModal('cart-modal');
     },
 
-    closeCart() {
-        document.getElementById('cart-modal').classList.add('hidden');
-    },
-
-    renderCartItems() {
-        const cartList = document.getElementById('cart-items');
+    renderCartList() {
+        const list = document.getElementById('cart-items');
         let total = 0;
         let html = '';
 
-        for (let itemId in this.cart) {
+        for (let id in this.cart) {
             let itemObj = null;
-            // Find item in our nested menu data
-            for (let cat in menuItems) {
-                const found = menuItems[cat].find(i => i.id === itemId);
+            Object.values(menuData).forEach(arr => {
+                const found = arr.find(i => i.id === id);
                 if (found) itemObj = found;
-            }
+            });
 
             if (itemObj) {
-                const qty = this.cart[itemId];
-                const itemTotal = qty * itemObj.price;
-                total += itemTotal;
+                const qty = this.cart[id];
+                const rowTotal = qty * itemObj.price;
+                total += rowTotal;
                 html += `
                     <div class="cart-item">
-                        <span>${itemObj.name} (x${qty})</span>
-                        <strong>${itemTotal} ج.م</strong>
-                    </div>
-                `;
+                        <span>${itemObj.name} <strong style="color:var(--orange-primary)">x${qty}</strong></span>
+                        <strong>${rowTotal} ج.م</strong>
+                    </div>`;
             }
         }
-        cartList.innerHTML = html;
+        list.innerHTML = html;
         document.getElementById('total-price').innerText = total;
     },
 
     submitOrder(e) {
         e.preventDefault();
-        this.closeCart();
-        document.getElementById('thank-you-popup').classList.remove('hidden');
+        this.closeModal('cart-modal');
+        this.showModal('thank-you-popup');
     },
 
     resetApp() {
         this.cart = {};
-        this.updateCartBadge();
-        document.getElementById('thank-you-popup').classList.add('hidden');
+        document.querySelectorAll('.action-wrap').forEach(w => w.classList.remove('active'));
+        document.getElementById('cart-fab').classList.add('hidden');
         document.getElementById('checkout-form').reset();
-        this.navigate('welcome');
+        this.closeModal('thank-you-popup');
+        window.scrollTo(0,0);
     },
 
-    // --- Cool 3D Mouse Tracking for Welcome Card ---
-    setup3DEffect() {
-        const welcomeScreen = document.getElementById('welcome-screen');
-        const card = document.querySelector('.welcome-content');
+    // Highlight Navigation Tabs on Scroll
+    setupScrollSpy() {
+        const sections = document.querySelectorAll('.menu-section');
+        const tabs = document.querySelectorAll('.nav-tab');
 
-        welcomeScreen.addEventListener('mousemove', (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            card.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(sec => {
+                const sectionTop = sec.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = sec.getAttribute('id');
+                }
+            });
 
-        welcomeScreen.addEventListener('mouseenter', () => {
-            card.style.transition = 'none';
+            tabs.forEach(tab => {
+                tab.classList.remove('active-tab');
+                if (tab.getAttribute('href') === `#${current}`) {
+                    tab.classList.add('active-tab');
+                }
+            });
         });
+    },
 
-        welcomeScreen.addEventListener('mouseleave', () => {
-            card.style.transition = 'transform 0.5s ease';
-            card.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
-        });
+    // Animate sections when they scroll into view
+    setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
     }
 };
 
-// Initialize App
-document.addEventListener('DOMContentLoaded', () => {
-    app.init();
-});
+document.addEventListener('DOMContentLoaded', () => app.init());
