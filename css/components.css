@@ -1,72 +1,66 @@
-/* Glass & Premium Cards */
-.premium-glass { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: var(--shadow-soft); }
+/* ==========================================
+   CARDS & PANELS
+========================================== */
+.premium-glass {
+    background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border); border-radius: 30px; box-shadow: var(--shadow-glow);
+}
+.hero-content { padding: 4rem; text-align: center; max-width: 850px; position: relative; z-index: 2; }
+.hero-title { font-size: 3.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 1rem; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+.hero-subtitle { font-size: 1.3rem; color: #eee; margin-bottom: 2.5rem; }
 
-.food-card { display: flex; flex-direction: column; background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft); transition: var(--transition-smooth); position: relative; border: 1px solid transparent; }
-.food-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-glow); border-color: rgba(211, 84, 0, 0.3); }
-.card-img-wrap { width: 100%; height: 220px; overflow: hidden; position: relative; }
-.card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-smooth); }
-.food-card:hover .card-img { transform: scale(1.08); }
-.card-body { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
-.card-title { font-size: 1.4rem; font-weight: 800; color: var(--charcoal); margin-bottom: 0.5rem; }
-.card-desc { font-size: 0.95rem; color: #666; margin-bottom: 1.5rem; line-height: 1.6; flex-grow: 1; }
-.card-footer { display: flex; justify-content: space-between; align-items: center; }
-.price-tag { font-size: 1.3rem; font-weight: 900; color: var(--terracotta); }
+/* Food Item Cards */
+.food-card {
+    background: rgba(30, 30, 40, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px; overflow: hidden; cursor: pointer; transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
+}
+.card-img-wrap { width: 100%; height: 200px; overflow: hidden; }
+.card-body { padding: 1.5rem; display: flex; flex-direction: column; }
+.card-title { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+.price-tag { font-size: 1.3rem; font-weight: 900; color: var(--saffron-gold); }
 
-/* Liquid Glass Button */
-.btn-liquid { position: relative; background: linear-gradient(135deg, var(--burnt-orange), var(--terracotta)); border: none; color: white; padding: 1rem 2.5rem; font-size: 1.3rem; font-weight: 800; border-radius: 50px; cursor: pointer; overflow: hidden; box-shadow: var(--shadow-glow); transition: transform 0.3s var(--ease-spring), box-shadow 0.3s; }
+/* Item Detail Panel */
+.item-detail-panel { width: 90%; max-width: 500px; overflow: hidden; position: relative; padding: 0; }
+.detail-img-wrap { width: 100%; height: 250px; }
+.detail-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.detail-body { padding: 2rem; text-align: right; }
+.detail-desc { color: #ccc; margin: 1rem 0; line-height: 1.6; font-size: 1.1rem; }
+
+/* ==========================================
+   BUTTONS & CONTROLS
+========================================== */
+.btn-liquid {
+    position: relative; background: linear-gradient(135deg, var(--brand-red), var(--dark-red));
+    border: none; color: white; padding: 1rem 3rem; font-size: 1.4rem; font-weight: 800; border-radius: 50px;
+    cursor: pointer; overflow: hidden; box-shadow: 0 10px 25px rgba(209, 26, 42, 0.4);
+    transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+}
 .btn-liquid span { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; }
 .liquid-shine { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); transition: 0s; z-index: 1; }
-.btn-liquid:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 35px rgba(211, 84, 0, 0.4); }
-.btn-liquid:hover .liquid-shine { animation: shine-sweep 0.8s forwards; }
 
-/* Nav Pills */
-.nav-pill { background: white; color: var(--charcoal); padding: 0.8rem 1.8rem; border-radius: 30px; font-weight: 800; cursor: pointer; border: 1px solid #e1d8c9; transition: all 0.3s var(--ease-smooth); white-space: nowrap; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-.nav-pill:hover, .nav-pill.active { background: var(--terracotta); color: white; border-color: var(--terracotta); transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+.btn-info-glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: 0.3s; white-space: nowrap; }
+.action-btn-small { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 15px; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.nav-pill { background: rgba(255,255,255,0.05); color: #fff; padding: 0.7rem 1.5rem; border-radius: 30px; font-weight: 700; cursor: pointer; border: 1px solid transparent; transition: all 0.3s var(--ease-smooth); text-decoration: none; white-space: nowrap; }
+.btn-close { position: absolute; top: 1.5rem; left: 1.5rem; background: rgba(255,255,255,0.1); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; color: white; cursor: pointer; transition: 0.3s; z-index: 10; }
 
-/* Morphing Quantity Stepper Engine */
-.action-morph { width: 130px; height: 45px; position: relative; border-radius: 12px; overflow: hidden; background: var(--sand-beige); }
-.btn-add-init { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--terracotta); color: white; border: none; font-weight: 800; cursor: pointer; transition: all 0.4s var(--ease-spring); z-index: 2; }
-.stepper-ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; background: white; border: 2px solid var(--terracotta); border-radius: 12px; z-index: 1; opacity: 0; transform: scale(0.8); transition: all 0.4s var(--ease-spring); }
-.action-morph.has-items .btn-add-init { opacity: 0; transform: translateY(-100%); pointer-events: none; }
-.action-morph.has-items .stepper-ui { opacity: 1; transform: scale(1); pointer-events: auto; }
-.step-btn { width: 35px; height: 100%; background: transparent; border: none; font-size: 1.2rem; color: var(--terracotta); font-weight: 900; cursor: pointer; transition: background 0.2s; }
-.step-btn:hover { background: var(--sand-beige); }
-.step-count { font-weight: 900; font-size: 1.2rem; color: var(--charcoal); }
-
-/* Floating FAB */
-#cart-fab { position: fixed; bottom: 2rem; left: 2rem; width: 70px; height: 70px; border-radius: 50%; background: var(--terracotta); color: white; border: none; font-size: 1.8rem; box-shadow: var(--shadow-glow); cursor: pointer; z-index: 99; transition: all 0.4s var(--ease-spring); }
-#cart-fab:hover { transform: scale(1.1) rotate(-5deg); }
+#cart-fab { position: fixed; bottom: 2rem; left: 2rem; width: 70px; height: 70px; border-radius: 50%; background: var(--brand-red); color: white; border: none; font-size: 1.8rem; box-shadow: 0 10px 25px rgba(209, 26, 42, 0.5); cursor: pointer; z-index: 99; transition: all 0.5s var(--ease-spring); }
 #cart-badge { position: absolute; top: -5px; right: -5px; background: var(--charcoal); color: var(--saffron-gold); width: 28px; height: 28px; border-radius: 50%; font-size: 1rem; font-weight: 900; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
 
-/* Wide Checkout Drawer */
-.drawer-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
-.drawer-overlay.active { opacity: 1; pointer-events: auto; }
-.drawer-content { width: 95%; max-width: 900px; max-height: 85vh; padding: 2.5rem; position: relative; transform: translateY(50px) scale(0.95); transition: all 0.5s var(--ease-spring); overflow-y: auto; }
-.drawer-overlay.active .drawer-content { transform: translateY(0) scale(1); }
-.btn-close { position: absolute; top: 1.5rem; left: 1.5rem; background: rgba(0,0,0,0.05); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; color: var(--charcoal); cursor: pointer; transition: 0.3s; }
-.btn-close:hover { background: var(--terracotta); color: white; transform: rotate(90deg); }
-
-.checkout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.section-title { margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.5rem; }
-.cart-scroll-area { max-height: 300px; overflow-y: auto; padding-left: 10px; margin-bottom: 1rem; }
-.cart-row { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px dashed #ccc; }
-.total-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.5); padding: 1rem; border-radius: 12px; border: 1px solid var(--saffron-gold); }
-
-/* Form Elements */
-.input-wrap { position: relative; margin-bottom: 1.2rem; }
-.input-wrap i { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--copper-highlight); }
-.input-wrap input { width: 100%; padding: 1rem 1rem 1rem 3rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; background: white; font-size: 1rem; outline: none; transition: border 0.3s; }
-.input-wrap input:focus { border-color: var(--terracotta); box-shadow: 0 0 0 4px rgba(211, 84, 0, 0.1); }
-.payment-badge { background: var(--sand-beige); padding: 1rem; border-radius: 12px; font-weight: 800; border: 1px solid var(--soft-olive); text-align: center; margin-bottom: 1rem; }
-
-/* Success Card */
-.success-card { text-align: center; padding: 4rem; max-width: 500px; transform: scale(0.8); transition: all 0.5s var(--ease-spring); }
-.drawer-overlay.active .success-card { transform: scale(1); }
-.success-icon { width: 90px; height: 90px; background: var(--soft-olive); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 1.5rem; animation: pulse-olive 2s infinite; }
-.btn-outline { border: 2px solid var(--charcoal); background: transparent; padding: 0.8rem 2rem; border-radius: 30px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-.btn-outline:hover { background: var(--charcoal); color: white; }
-
-@media (max-width: 768px) {
-    .checkout-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-title { font-size: 3rem; }
+/* Interactive Elements */
+.restaurant-info { display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; opacity: 0.9; }
+.dot-separator { color: var(--saffron-gold); font-size: 1.2rem; }
+.glow-line-container { display: flex; align-items: center; justify-content: space-between; gap: 20px; position: relative; padding: 10px 0; }
+.glow-line { flex-grow: 1; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; border-radius: 2px; }
+.glow-line::before {
+    content: ''; position: absolute; top: -10px; left: -100px; width: 200px; height: 20px;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 70%);
+    transform: translateX(var(--mouse-x, -500px)); pointer-events: none;
 }
+
+/* Form & Modals specifics */
+.input-wrap { position: relative; margin-bottom: 1.2rem; }
+.input-wrap i { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #aaa; }
+.input-wrap input { width: 100%; padding: 1rem 1rem 1rem 3rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; background: rgba(0,0,0,0.3); color: white; font-size: 1rem; outline: none; transition: 0.3s; }
+.payment-badge { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; font-weight: 800; border: 1px solid var(--soft-olive); text-align: center; margin-bottom: 1rem; }
+.total-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
