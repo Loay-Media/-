@@ -1,1 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البيت السوري – إسماعيلية | أصل الطعم الشامي</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
 
+    <div class="ambient-background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="steam-layer"></div>
+    </div>
+
+    <div id="scene-transition" class="scene-transition"></div>
+
+    <button id="cart-fab" class="glass-btn hidden" onclick="app.toggleCart()">
+        <i class="fa-solid fa-bell-concierge"></i>
+        <span id="cart-badge">0</span>
+    </button>
+
+    <section id="welcome-screen" class="screen-active">
+        <div class="hero-content reveal">
+            <div class="badge-premium">مطعم وكافيه</div>
+            <h1 class="hero-title">أهلاً بيكم في<br><span class="text-gold">البيت السوري</span></h1>
+            <p class="hero-subtitle">أكل يفتح النفس… وطعم يفضل فاكرُه. خبرة الشام كلها بين إيديك في الإسماعيلية.</p>
+            
+            <button class="btn-liquid" onclick="app.enterMenu()">
+                <span>شوف المنيو <i class="fa-solid fa-arrow-left ms-2"></i></span>
+                <div class="liquid-shine"></div>
+            </button>
+
+            <div class="trust-indicators mt-4">
+                <span><i class="fa-solid fa-fire"></i> تسوية عالحطب</span>
+                <span><i class="fa-solid fa-leaf"></i> لحوم بلدي 100%</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu-screen" class="screen-hidden">
+        
+        <nav class="category-nav" id="sticky-nav">
+            <div class="nav-track" id="nav-track">
+                </div>
+        </nav>
+
+        <div class="brand-banner reveal">
+            <div class="banner-overlay"></div>
+            <div class="banner-text">
+                <h2>من قلب دمشق للإسماعيلية</h2>
+                <p>بنهتم بكل تفصيلة عشان نقدم لك تجربة ملوكي.</p>
+            </div>
+        </div>
+
+        <div class="menu-ecosystem" id="menu-container">
+            </div>
+
+        <footer class="luxury-footer reveal">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>البيت السوري</h2>
+                    <p>أصل الطعم الشامي في مصر.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>أرقام الخدمة</h3>
+                    <p><i class="fa-solid fa-phone text-gold"></i> 19888 (الخط الساخن)</p>
+                    <p><i class="fa-brands fa-whatsapp text-gold"></i> 01012345678</p>
+                </div>
+                <div class="footer-links">
+                    <h3>مواعيد العمل</h3>
+                    <p>مفتوحين 24 ساعة لخدمتكم يومياً.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 البيت السوري - الإسماعيلية. جميع الحقوق محفوظة.</p>
+            </div>
+        </footer>
+    </section>
+
+    <div id="cart-drawer" class="drawer-overlay">
+        <div class="drawer-content premium-glass">
+            <button class="btn-close" onclick="app.toggleCart()"><i class="fa-solid fa-times"></i></button>
+            
+            <div class="checkout-grid">
+                <div class="order-summary">
+                    <h2 class="section-title">طلبك <i class="fa-solid fa-bag-shopping"></i></h2>
+                    <div id="cart-items" class="cart-scroll-area"></div>
+                    <div class="total-bar">
+                        <span>الإجمالي:</span>
+                        <span class="text-gold h3"><span id="cart-total">0</span> ج.م</span>
+                    </div>
+                </div>
+
+                <div class="checkout-form-area">
+                    <h2 class="section-title">بيانات التوصيل</h2>
+                    <form id="checkout-form" onsubmit="app.submitOrder(event)">
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="الاسم الكامل" required>
+                        </div>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <input type="tel" placeholder="رقم الهاتف" required>
+                        </div>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <input type="text" placeholder="العنوان بالتفصيل (منطقة، شارع، عمارة)" required>
+                        </div>
+                        <div class="payment-badge">
+                            <i class="fa-solid fa-money-bill-1-wave text-olive"></i> الدفع كاش عند الاستلام
+                        </div>
+                        <button type="submit" class="btn-liquid w-100 mt-2">
+                            <span>تأكيد الطلب</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="drawer-overlay">
+        <div class="success-card premium-glass">
+            <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+            <h2>شكراً لاختيارك البيت السوري</h2>
+            <p>طلبك تحت التجهيز دلوقتي وهيوصلك سخن نار!</p>
+            <button class="btn-outline mt-3" onclick="app.resetApp()">طلب جديد</button>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
