@@ -1,1 +1,23 @@
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-40px) rotate(10deg); }
+}
 
+@keyframes shine-sweep {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+@keyframes pulse-olive {
+    0% { box-shadow: 0 0 0 0 rgba(130, 138, 92, 0.6); }
+    70% { box-shadow: 0 0 0 20px rgba(130, 138, 92, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(130, 138, 92, 0); }
+}
+
+/* Scroll Reveal Classes */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Cinematic Transition Effect */
+.scene-transition { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--charcoal); z-index: 9999; transform: scaleY(0); transform-origin: top; transition: transform 0.8s var(--ease-smooth); pointer-events: none; }
+.scene-transition.active { transform: scaleY(1); transform-origin: bottom; }
