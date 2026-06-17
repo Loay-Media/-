@@ -241,9 +241,3 @@ window.RESTAURANT_DATA = {
     }
   ]
 };
-
-window.RESTAURANT_DATA.categories.forEach(category => {
-  category.items.forEach(item => {
-    item.categoryId = category.id;
-  });
-});
