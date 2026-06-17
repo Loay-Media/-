@@ -11,37 +11,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Unified CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Modular CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
 
     <!-- Cinematic Liquid Transition Layer -->
     <div id="scene-transition" class="liquid-transition"></div>
 
-    <!-- Floating Cart Icon (Hidden Initially) -->
+    <!-- Floating Cart Icon -->
     <button id="cart-fab" class="glass-btn hidden-cart" onclick="app.toggleCart()">
         <i class="fa-solid fa-bell-concierge"></i>
         <span id="cart-badge">0</span>
     </button>
 
     <!-- ==========================================
-         SCREEN 1: CINEMATIC WELCOME (Storefront)
+         SCREEN 1: CINEMATIC WELCOME 
     =========================================== -->
     <section id="welcome-screen" class="screen-active">
         
-        <!-- 1) Realistic Storefront Background -->
+        <!-- Realistic Storefront Background -->
         <div class="storefront-bg">
             <div class="wall-texture"></div>
             <div class="signboard">
                 <h1 class="signboard-text">البيت الدمشقي</h1>
             </div>
-            <!-- Ambient lighting for realism -->
             <div class="ambient-light"></div>
         </div>
 
-        <!-- 2) The Premium Glass Layer (Foreground) -->
-        <div class="hero-content premium-glass reveal">
+        <!-- Premium Glass Layer Foreground -->
+        <div class="hero-content premium-glass">
             <h1 class="hero-title">مطعم سوري على أصوله</h1>
             <p class="hero-subtitle">أكل يفتح النفس… وطعم يفضل فاكرُه. خبرة الشام كلها بين إيديك.</p>
             
@@ -57,7 +59,7 @@
                 <span><i class="fa-solid fa-money-bill-wave"></i> الدفع كاش فقط</span>
             </div>
 
-            <!-- Glowing Info Buttons Area -->
+            <!-- Glowing Info Buttons -->
             <div class="glow-line-container mt-4" id="glow-container">
                 <button class="btn-info-glass" onclick="app.showModal('numbers-modal')">أرقام الخدمة</button>
                 <div class="glow-line" id="glow-line"></div>
@@ -82,14 +84,14 @@
                     <p class="nav-brand-sub">أصناف شامية مختارة</p>
                 </div>
                 <div class="nav-track" id="nav-track">
-                    <!-- Injected via JS -->
+                    <!-- Nav items injected via JS -->
                 </div>
             </div>
         </nav>
 
-        <!-- Menu Sections Container -->
+        <!-- Menu Ecosystem -->
         <div class="menu-ecosystem" id="menu-container">
-            <!-- Sections Injected via JS -->
+            <!-- Sections injected via JS -->
         </div>
     </section>
 
@@ -97,7 +99,7 @@
          OVERLAYS & MODALS
     =========================================== -->
 
-    <!-- Item Inspection Modal (Glass Panel) -->
+    <!-- Item Inspection Drawer -->
     <div id="item-modal" class="drawer-overlay">
         <div class="item-detail-panel premium-glass">
             <button class="btn-close" onclick="app.closeModal('item-modal')"><i class="fa-solid fa-times"></i></button>
@@ -151,7 +153,7 @@
             <button class="btn-close" onclick="app.toggleCart()"><i class="fa-solid fa-times"></i></button>
             
             <div class="checkout-grid">
-                <!-- Right: Order Summary -->
+                <!-- Order Summary -->
                 <div class="order-summary">
                     <h2 class="section-title">طلبك <i class="fa-solid fa-bag-shopping"></i></h2>
                     <div id="cart-items" class="cart-scroll-area"></div>
@@ -161,7 +163,7 @@
                     </div>
                 </div>
 
-                <!-- Left: Checkout Form -->
+                <!-- Checkout Form -->
                 <div class="checkout-form-area">
                     <h2 class="section-title">بيانات التوصيل</h2>
                     <form id="checkout-form" onsubmit="app.submitOrder(event)">
@@ -199,6 +201,8 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <!-- Logic -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
