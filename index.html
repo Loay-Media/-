@@ -3,96 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>البيت السوري – إسماعيلية | أصل الطعم الشامي</title>
+    <title>مطعم البيت الدمشقي | تجربة شامية أصيلة</title>
     
+    <!-- Premium Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
+    <!-- Unified CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="ambient-background">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="steam-layer"></div>
-    </div>
+    <!-- Cinematic Liquid Transition Layer -->
+    <div id="scene-transition" class="liquid-transition"></div>
 
-    <div id="scene-transition" class="scene-transition"></div>
-
-    <button id="cart-fab" class="glass-btn hidden" onclick="app.toggleCart()">
+    <!-- Floating Cart Icon (Hidden Initially) -->
+    <button id="cart-fab" class="glass-btn hidden-cart" onclick="app.toggleCart()">
         <i class="fa-solid fa-bell-concierge"></i>
         <span id="cart-badge">0</span>
     </button>
 
+    <!-- ==========================================
+         SCREEN 1: CINEMATIC WELCOME (Storefront)
+    =========================================== -->
     <section id="welcome-screen" class="screen-active">
-        <div class="hero-content reveal">
-            <div class="badge-premium">مطعم وكافيه</div>
-            <h1 class="hero-title">أهلاً بيكم في<br><span class="text-gold">البيت السوري</span></h1>
-            <p class="hero-subtitle">أكل يفتح النفس… وطعم يفضل فاكرُه. خبرة الشام كلها بين إيديك في الإسماعيلية.</p>
+        
+        <!-- 1) Realistic Storefront Background -->
+        <div class="storefront-bg">
+            <div class="wall-texture"></div>
+            <div class="signboard">
+                <h1 class="signboard-text">البيت الدمشقي</h1>
+            </div>
+            <!-- Ambient lighting for realism -->
+            <div class="ambient-light"></div>
+        </div>
+
+        <!-- 2) The Premium Glass Layer (Foreground) -->
+        <div class="hero-content premium-glass reveal">
+            <h1 class="hero-title">مطعم سوري على أصوله</h1>
+            <p class="hero-subtitle">أكل يفتح النفس… وطعم يفضل فاكرُه. خبرة الشام كلها بين إيديك.</p>
             
             <button class="btn-liquid" onclick="app.enterMenu()">
-                <span>شوف المنيو <i class="fa-solid fa-arrow-left ms-2"></i></span>
+                <span>ابدأ الطلب <i class="fa-solid fa-arrow-left ms-2"></i></span>
                 <div class="liquid-shine"></div>
             </button>
 
-            <div class="trust-indicators mt-4">
-                <span><i class="fa-solid fa-fire"></i> تسوية عالحطب</span>
-                <span><i class="fa-solid fa-leaf"></i> لحوم بلدي 100%</span>
+            <!-- Hours & Payment Info -->
+            <div class="restaurant-info mt-3">
+                <span><i class="fa-regular fa-clock"></i> من ١ ظهرًا إلى ١٢ مساءً</span>
+                <span class="dot-separator">•</span>
+                <span><i class="fa-solid fa-money-bill-wave"></i> الدفع كاش فقط</span>
+            </div>
+
+            <!-- Glowing Info Buttons Area -->
+            <div class="glow-line-container mt-4" id="glow-container">
+                <button class="btn-info-glass" onclick="app.showModal('numbers-modal')">أرقام الخدمة</button>
+                <div class="glow-line" id="glow-line"></div>
+                <button class="btn-info-glass" onclick="app.showModal('faq-modal')">الأسئلة الشائعة</button>
             </div>
         </div>
     </section>
 
+    <!-- ==========================================
+         SCREEN 2: MAIN MENU HUB
+    =========================================== -->
     <section id="menu-screen" class="screen-hidden">
         
-        <nav class="category-nav" id="sticky-nav">
-            <div class="nav-track" id="nav-track">
+        <!-- Blurred Secondary Background -->
+        <div class="menu-blurred-bg"></div>
+
+        <!-- Sticky Dark Frosted Nav -->
+        <nav class="category-nav frosted-dark" id="sticky-nav">
+            <div class="nav-container">
+                <div class="nav-brand-area">
+                    <h2 class="nav-brand-title">البيت الدمشقي</h2>
+                    <p class="nav-brand-sub">أصناف شامية مختارة</p>
                 </div>
+                <div class="nav-track" id="nav-track">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
         </nav>
 
-        <div class="brand-banner reveal">
-            <div class="banner-overlay"></div>
-            <div class="banner-text">
-                <h2>من قلب دمشق للإسماعيلية</h2>
-                <p>بنهتم بكل تفصيلة عشان نقدم لك تجربة ملوكي.</p>
-            </div>
-        </div>
-
+        <!-- Menu Sections Container -->
         <div class="menu-ecosystem" id="menu-container">
-            </div>
-
-        <footer class="luxury-footer reveal">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h2>البيت السوري</h2>
-                    <p>أصل الطعم الشامي في مصر.</p>
-                </div>
-                <div class="footer-links">
-                    <h3>أرقام الخدمة</h3>
-                    <p><i class="fa-solid fa-phone text-gold"></i> 19888 (الخط الساخن)</p>
-                    <p><i class="fa-brands fa-whatsapp text-gold"></i> 01012345678</p>
-                </div>
-                <div class="footer-links">
-                    <h3>مواعيد العمل</h3>
-                    <p>مفتوحين 24 ساعة لخدمتكم يومياً.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 البيت السوري - الإسماعيلية. جميع الحقوق محفوظة.</p>
-            </div>
-        </footer>
+            <!-- Sections Injected via JS -->
+        </div>
     </section>
 
+    <!-- ==========================================
+         OVERLAYS & MODALS
+    =========================================== -->
+
+    <!-- Item Inspection Modal (Glass Panel) -->
+    <div id="item-modal" class="drawer-overlay">
+        <div class="item-detail-panel premium-glass">
+            <button class="btn-close" onclick="app.closeModal('item-modal')"><i class="fa-solid fa-times"></i></button>
+            <div class="detail-img-wrap">
+                <img src="" id="detail-img" alt="Food Image">
+            </div>
+            <div class="detail-body">
+                <h2 id="detail-title">الاسم</h2>
+                <p id="detail-desc" class="detail-desc">المكونات</p>
+                <div class="detail-price-row">
+                    <span class="price-tag" id="detail-price">0 ج.م</span>
+                </div>
+                <div class="detail-actions mt-3">
+                    <button class="btn-liquid w-100" id="detail-add-btn">
+                        <span>أضف للسلة <i class="fa-solid fa-cart-plus ms-2"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Numbers Modal -->
+    <div id="numbers-modal" class="drawer-overlay">
+        <div class="info-card premium-glass">
+            <button class="btn-close" onclick="app.closeModal('numbers-modal')"><i class="fa-solid fa-times"></i></button>
+            <h2 class="mb-3 text-gold">أرقام الخدمة</h2>
+            <div class="local-numbers">
+                <p><i class="fa-solid fa-phone"></i> 01234567890</p>
+                <p><i class="fa-solid fa-phone"></i> 01098765432</p>
+                <p><i class="fa-brands fa-whatsapp text-olive"></i> 01111222333</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Modal -->
+    <div id="faq-modal" class="drawer-overlay">
+        <div class="info-card premium-glass">
+            <button class="btn-close" onclick="app.closeModal('faq-modal')"><i class="fa-solid fa-times"></i></button>
+            <h2 class="mb-3 text-gold">الأسئلة الشائعة</h2>
+            <ul class="faq-list">
+                <li><strong>بتوصلوا لفين؟</strong><br>لجميع المناطق داخل الإسماعيلية.</li>
+                <li><strong>فيه دفع فيزا؟</strong><br>حالياً الدفع المتاح كاش فقط عند الاستلام.</li>
+                <li><strong>مواعيد التوصيل؟</strong><br>بنوصل من 1 ظهرًا لحد 12 مساءً.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Wide Checkout Drawer -->
     <div id="cart-drawer" class="drawer-overlay">
         <div class="drawer-content premium-glass">
             <button class="btn-close" onclick="app.toggleCart()"><i class="fa-solid fa-times"></i></button>
             
             <div class="checkout-grid">
+                <!-- Right: Order Summary -->
                 <div class="order-summary">
                     <h2 class="section-title">طلبك <i class="fa-solid fa-bag-shopping"></i></h2>
                     <div id="cart-items" class="cart-scroll-area"></div>
@@ -102,6 +161,7 @@
                     </div>
                 </div>
 
+                <!-- Left: Checkout Form -->
                 <div class="checkout-form-area">
                     <h2 class="section-title">بيانات التوصيل</h2>
                     <form id="checkout-form" onsubmit="app.submitOrder(event)">
@@ -115,7 +175,7 @@
                         </div>
                         <div class="input-wrap">
                             <i class="fa-solid fa-map-location-dot"></i>
-                            <input type="text" placeholder="العنوان بالتفصيل (منطقة، شارع، عمارة)" required>
+                            <input type="text" placeholder="العنوان بالتفصيل" required>
                         </div>
                         <div class="payment-badge">
                             <i class="fa-solid fa-money-bill-1-wave text-olive"></i> الدفع كاش عند الاستلام
@@ -129,16 +189,16 @@
         </div>
     </div>
 
+    <!-- Success Modal -->
     <div id="success-modal" class="drawer-overlay">
         <div class="success-card premium-glass">
             <div class="success-icon"><i class="fa-solid fa-check"></i></div>
-            <h2>شكراً لاختيارك البيت السوري</h2>
-            <p>طلبك تحت التجهيز دلوقتي وهيوصلك سخن نار!</p>
+            <h2>طلبك اتسجل بنجاح!</h2>
+            <p>الأكل تحت التجهيز دلوقتي وهيوصلك سخن في أسرع وقت.</p>
             <button class="btn-outline mt-3" onclick="app.resetApp()">طلب جديد</button>
         </div>
     </div>
 
-    <script src="js/data.js"></script>
-    <script src="js/app.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
