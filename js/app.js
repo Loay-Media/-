@@ -1,5 +1,6 @@
 (() => {
   const data = window.RESTAURANT_DATA;
+
   const state = {
     entered: false,
     cart: loadCart(),
@@ -14,6 +15,7 @@
     mainApp: document.getElementById("mainApp"),
     enterBtn: document.getElementById("enterBtn"),
     heroPhoto: document.getElementById("heroPhoto"),
+    menuBackdropPhoto: document.getElementById("menuBackdropPhoto"),
     faqOpenBtn: document.getElementById("faqOpenBtn"),
     servicesOpenBtn: document.getElementById("servicesOpenBtn"),
     hoverLineWrap: document.getElementById("hoverLineWrap"),
@@ -65,12 +67,6 @@
     return state.cart[id]?.qty || 0;
   }
 
-  function totalFor(id) {
-    const item = getItemById(id);
-    const qty = qtyFor(id);
-    return item ? item.price * qty : 0;
-  }
-
   function cartCount() {
     return Object.values(state.cart).reduce((sum, entry) => sum + entry.qty, 0);
   }
@@ -82,43 +78,8 @@
     }, 0);
   }
 
-  function addToCart(id, delta = 1) {
-    const current = state.cart[id]?.qty || 0;
-    const next = Math.max(0, current + delta);
-
-    if (next === 0) {
-      delete state.cart[id];
-    } else {
-      state.cart[id] = { id, qty: next };
-    }
-
-    saveCart();
-    renderCart();
-    renderMenu();
-    if (state.detailItem && state.detailItem.id === id) {
-      state.detailQty = next || 1;
-      renderDetailModal(state.detailItem);
-    }
-  }
-
-  function setQty(id, qty) {
-    if (qty <= 0) {
-      delete state.cart[id];
-    } else {
-      state.cart[id] = { id, qty };
-    }
-    saveCart();
-    renderCart();
-    renderMenu();
-    if (state.detailItem && state.detailItem.id === id) {
-      state.detailQty = qty || 1;
-      renderDetailModal(state.detailItem);
-    }
-  }
-
-  function renderStepControl(itemId, compact = false) {
+  function stepControlHTML(itemId) {
     const qty = qtyFor(itemId);
-    const isCompact = qty <= 0 || compact ? "is-compact" : "";
     if (qty <= 0) {
       return `
         <div class="qty-control is-compact" data-qty-wrap="${itemId}">
@@ -126,6 +87,7 @@
         </div>
       `;
     }
+
     return `
       <div class="qty-control" data-qty-wrap="${itemId}">
         <button class="qty-minus" data-action="qty-sub" data-id="${itemId}">−</button>
@@ -135,12 +97,74 @@
     `;
   }
 
+  function syncMenuQuantityControls() {
+    document.querySelectorAll("[data-qty-wrap]").forEach(wrap => {
+      const id = wrap.dataset.qtyWrap;
+      wrap.outerHTML = stepControlHTML(id);
+    });
+  }
+
+  function updateDetailQtyText() {
+    const node = document.getElementById("detailQtyValue");
+    if (node) node.textContent = String(state.detailQty);
+  }
+
+  function addToCart(id, delta = 1) {
+    const current = state.cart[id]?.qty || 0;
+    const next = Math.max(0, current + delta);
+
+    if (next === 0) delete state.cart[id];
+    else state.cart[id] = { id, qty: next };
+
+    saveCart();
+    renderCart();
+    syncMenuQuantityControls();
+    updateDetailQtyText();
+  }
+
+  function setQty(id, qty) {
+    const next = Math.max(0, qty);
+    if (next === 0) delete state.cart[id];
+    else state.cart[id] = { id, qty: next };
+
+    saveCart();
+    renderCart();
+    syncMenuQuantityControls();
+    updateDetailQtyText();
+  }
+
   function renderCategoryNav() {
     els.categoryNav.innerHTML = data.categories.map(category => `
       <button class="category-btn ${category.id === state.activeCategory ? "active" : ""}" data-scroll-to="${category.id}">
         ${category.name}
       </button>
     `).join("");
+  }
+
+  function renderCard(item) {
+    return `
+      <article class="food-card shimmer-layer" data-open-item="${item.id}">
+        <div class="food-media">
+          <img src="${item.image}" alt="${item.name}" loading="lazy" />
+          <div class="food-chip">مميز</div>
+        </div>
+
+        <div class="food-body">
+          <h4 class="food-title">${item.name}</h4>
+          <p class="food-desc">${item.desc}</p>
+
+          <div class="food-row">
+            <div class="food-price">${money(item.price)}</div>
+            <button class="inspect-btn" data-open-item-btn="${item.id}">تفاصيل</button>
+          </div>
+
+          <div class="food-row">
+            ${stepControlHTML(item.id)}
+            <button class="inspect-btn" data-add-direct="${item.id}">أضف للسلة</button>
+          </div>
+        </div>
+      </article>
+    `;
   }
 
   function renderSections() {
@@ -167,33 +191,6 @@
     observeSections();
   }
 
-  function renderCard(item) {
-    const qty = qtyFor(item.id);
-    return `
-      <article class="food-card shimmer-layer" data-open-item="${item.id}">
-        <div class="food-media">
-          <img src="${item.image}" alt="${item.name}" loading="lazy" />
-          <div class="food-chip">مميز</div>
-        </div>
-
-        <div class="food-body">
-          <h4 class="food-title">${item.name}</h4>
-          <p class="food-desc">${item.desc}</p>
-
-          <div class="food-row">
-            <div class="food-price">${money(item.price)}</div>
-            <button class="inspect-btn" data-open-item-btn="${item.id}">تفاصيل</button>
-          </div>
-
-          <div class="food-row">
-            ${renderStepControl(item.id)}
-            <button class="inspect-btn" data-add-direct="${item.id}">أضف للسلة</button>
-          </div>
-        </div>
-      </article>
-    `;
-  }
-
   function renderMenu() {
     renderCategoryNav();
     renderSections();
@@ -201,14 +198,13 @@
 
   function renderCart() {
     const items = Object.values(state.cart);
-
-    els.cartCount.textContent = cartCount();
+    els.cartCount.textContent = String(cartCount());
     els.cartTotal.textContent = money(cartTotal());
 
     if (!items.length) {
       els.cartItems.innerHTML = `
         <div class="cart-empty glass-panel" style="padding:16px;border-radius:20px;">
-          <strong>السلة فاضية</strong>
+          <strong style="color:#fff3dd;">السلة فاضية</strong>
           <p style="margin:8px 0 0;color:var(--text-soft);">اختار أصنافك المفضلة ثم ارجع هنا لإتمام الطلب.</p>
         </div>
       `;
@@ -225,11 +221,11 @@
               <p class="cart-item-name">${item.name}</p>
               <p class="cart-item-desc">${item.desc}</p>
             </div>
-            <strong>${money(item.price * entry.qty)}</strong>
+            <strong style="color:#ffe2a0;">${money(item.price * entry.qty)}</strong>
           </div>
 
           <div class="cart-item-meta">
-            ${renderStepControl(item.id, true)}
+            ${stepControlHTML(item.id)}
             <button class="inspect-btn" data-open-item="${item.id}">عرض</button>
           </div>
         </div>
@@ -280,17 +276,9 @@
     closeCheckout();
   }
 
-  function openItem(itemId) {
-    const item = getItemById(itemId);
-    if (!item) return;
-    state.detailItem = item;
-    state.detailQty = qtyFor(itemId) || 1;
-    renderDetailModal(item);
-    openOverlay(els.itemModal);
-  }
-
   function renderDetailModal(item) {
     const ingredients = item.full.split("،").map(s => s.trim()).filter(Boolean);
+
     els.itemModalBody.innerHTML = `
       <div class="detail-hero">
         <div class="detail-visual glass-panel">
@@ -309,9 +297,9 @@
 
           <div class="detail-actions">
             <div class="qty-control" data-modal-qty="${item.id}">
-              <button class="qty-minus" data-action="modal-qty-sub" data-id="${item.id}">−</button>
+              <button class="qty-minus" data-action="detail-qty-sub" data-id="${item.id}">−</button>
               <div class="qty-count" id="detailQtyValue">${state.detailQty}</div>
-              <button class="qty-plus" data-action="modal-qty-add" data-id="${item.id}">+</button>
+              <button class="qty-plus" data-action="detail-qty-add" data-id="${item.id}">+</button>
             </div>
             <button class="checkout-btn" data-modal-add="${item.id}">أضف للسلة</button>
           </div>
@@ -322,6 +310,15 @@
     `;
   }
 
+  function openItem(itemId) {
+    const item = getItemById(itemId);
+    if (!item) return;
+    state.detailItem = item;
+    state.detailQty = qtyFor(itemId) || 1;
+    renderDetailModal(item);
+    openOverlay(els.itemModal);
+  }
+
   function enterApp() {
     if (state.entered) return;
     state.entered = true;
@@ -330,20 +327,21 @@
     setTimeout(() => {
       els.cartTrigger.style.opacity = "1";
       els.cartTrigger.style.pointerEvents = "auto";
-    }, 320);
+    }, 280);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => scrollToCategory(data.categories[0].id), 450);
   }
 
   function scrollToCategory(categoryId) {
     const section = document.getElementById(`section-${categoryId}`);
     if (!section) return;
-
-    const topOffset = 120;
+    const topOffset = 122;
     const y = section.getBoundingClientRect().top + window.pageYOffset - topOffset;
     window.scrollTo({ top: y, behavior: "smooth" });
   }
 
   function observeReveal() {
-    const items = document.querySelectorAll(".reveal");
+    const items = document.querySelectorAll(".reveal:not(.in-view)");
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -373,11 +371,15 @@
     sections.forEach(section => io.observe(section));
   }
 
-  function setupHeroFallback() {
-    els.heroPhoto.addEventListener("error", () => {
-      els.heroPhoto.style.display = "none";
-      document.body.classList.add("hero-fallback");
-    });
+  function setupImageFallbacks() {
+    const fallback = (img) => {
+      img.addEventListener("error", () => {
+        img.style.display = "none";
+      });
+    };
+
+    fallback(els.heroPhoto);
+    fallback(els.menuBackdropPhoto);
   }
 
   function setupHoverLine() {
@@ -428,17 +430,17 @@
         return;
       }
 
-      const modalQtyAdd = target.closest("[data-action='modal-qty-add']");
-      if (modalQtyAdd) {
+      const detailAdd = target.closest("[data-action='detail-qty-add']");
+      if (detailAdd) {
         state.detailQty += 1;
-        setQty(modalQtyAdd.dataset.id, state.detailQty);
+        updateDetailQtyText();
         return;
       }
 
-      const modalQtySub = target.closest("[data-action='modal-qty-sub']");
-      if (modalQtySub) {
+      const detailSub = target.closest("[data-action='detail-qty-sub']");
+      if (detailSub) {
         state.detailQty = Math.max(1, state.detailQty - 1);
-        setQty(modalQtySub.dataset.id, state.detailQty);
+        updateDetailQtyText();
         return;
       }
 
@@ -492,16 +494,13 @@
   }
 
   function bindButtons() {
-    els.enterBtn.addEventListener("click", () => {
-      enterApp();
-      setTimeout(() => scrollToCategory(data.categories[0].id), 350);
-    });
-
+    els.enterBtn.addEventListener("click", enterApp);
     els.faqOpenBtn.addEventListener("click", openFaq);
     els.servicesOpenBtn.addEventListener("click", openServices);
 
     els.cartTrigger.addEventListener("click", openCart);
     els.closeCartBtn.addEventListener("click", closeCart);
+
     els.checkoutBtn.addEventListener("click", () => {
       if (!Object.keys(state.cart).length) return;
       closeCart();
@@ -515,18 +514,27 @@
       state.cart = {};
       saveCart();
       renderCart();
-      renderMenu();
+      syncMenuQuantityControls();
       flashSuccess();
     });
   }
 
+  function bindKeyboard() {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAllModals();
+    });
+  }
+
   function boot() {
-    setupHeroFallback();
+    setupImageFallbacks();
     setupHoverLine();
     bindButtons();
     bindGlobalClicks();
+    bindKeyboard();
+
     renderMenu();
     renderCart();
+    syncMenuQuantityControls();
 
     if (Object.keys(state.cart).length) {
       document.body.classList.add("entered");
