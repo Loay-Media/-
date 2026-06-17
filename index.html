@@ -16,15 +16,15 @@
   <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-  <div class="noise-layer"></div>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-  <div class="ambient ambient-three"></div>
+  <div class="noise-layer" aria-hidden="true"></div>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="ambient ambient-three" aria-hidden="true"></div>
 
   <main class="app-root">
-    <!-- WELCOME SCREEN -->
+    <!-- WELCOME -->
     <section id="welcomeScreen" class="welcome-screen">
-      <div class="welcome-bg">
+      <div class="welcome-bg" aria-hidden="true">
         <img id="heroPhoto" class="welcome-photo" src="assets/restaurant-sign.jpg" alt="مطعم البيت الدمشقي" />
         <div class="welcome-photo-overlay"></div>
 
@@ -46,9 +46,11 @@
       </div>
 
       <div class="welcome-foreground">
-        <div class="glass-panel welcome-glass">
+        <div class="glass-panel welcome-glass shimmer-layer">
           <div class="welcome-badge">مطعم سوري على أصوله</div>
-          <h1 class="hero-title">أهلاً بيكم في البيت الدمشقي</h1>
+          <h1 class="hero-title">
+            أهلاً بيكم في <span class="accent-title">البيت الدمشقي</span>
+          </h1>
           <p class="hero-subtitle">
             أكل يفتح النفس… وطعم يفضل فاكرُه.
             <span class="hero-subline">تجربة شامية أصيلة بلمسة راقية.</span>
@@ -57,7 +59,7 @@
           <div class="hero-stats">
             <div class="stat-chip">خدمة سريعة</div>
             <div class="stat-chip">أكل طازة</div>
-            <div class="stat-chip">دفع كاش فقط</div>
+            <div class="stat-chip">الدفع كاش فقط</div>
           </div>
 
           <button id="enterBtn" class="glassy-cta">
@@ -84,6 +86,12 @@
 
     <!-- MAIN APP -->
     <section id="mainApp" class="main-app">
+      <div class="menu-backdrop" aria-hidden="true">
+        <img id="menuBackdropPhoto" class="menu-backdrop-photo" src="assets/restaurant-sign.jpg" alt="" />
+        <div class="menu-backdrop-overlay"></div>
+        <div class="menu-backdrop-soft"></div>
+      </div>
+
       <header class="top-brand glass-panel">
         <div class="brand-copy">
           <div class="brand-name">البيت الدمشقي</div>
@@ -124,7 +132,7 @@
     </section>
   </main>
 
-  <!-- ITEM DETAIL MODAL -->
+  <!-- ITEM MODAL -->
   <div id="itemModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-backdrop"></div>
     <div class="modal-window glass-panel">
@@ -133,7 +141,7 @@
     </div>
   </div>
 
-  <!-- FAQ MODAL -->
+  <!-- FAQ -->
   <div id="faqModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-backdrop"></div>
     <div class="modal-window glass-panel narrow">
@@ -160,7 +168,7 @@
     </div>
   </div>
 
-  <!-- SERVICE NUMBERS MODAL -->
+  <!-- SERVICES -->
   <div id="servicesModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-backdrop"></div>
     <div class="modal-window glass-panel narrow">
@@ -178,7 +186,7 @@
     </div>
   </div>
 
-  <!-- CART DRAWER -->
+  <!-- CART -->
   <aside id="cartDrawer" class="cart-drawer glass-panel" aria-hidden="true">
     <div class="drawer-head">
       <div>
@@ -200,7 +208,7 @@
     </div>
   </aside>
 
-  <!-- CHECKOUT MODAL -->
+  <!-- CHECKOUT -->
   <div id="checkoutModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-backdrop"></div>
     <div class="modal-window glass-panel checkout-window">
@@ -227,7 +235,6 @@
           <span>العنوان</span>
           <input type="text" name="address" placeholder="اكتب العنوان بالتفصيل" required>
         </label>
-
         <label>
           <span>طريقة الدفع</span>
           <input type="text" value="كاش" disabled>
@@ -238,7 +245,7 @@
     </div>
   </div>
 
-  <!-- SUCCESS OVERLAY -->
+  <!-- SUCCESS -->
   <div id="successOverlay" class="success-overlay">
     <div class="success-card glass-panel">
       <div class="success-icon">✓</div>
