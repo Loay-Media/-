@@ -16,13 +16,8 @@
   100% { transform: translateX(160%) skewX(-16deg); opacity: 0; }
 }
 
-@keyframes glowPulse {
-  0%,100% { opacity: .35; transform: scale(1); }
-  50% { opacity: .7; transform: scale(1.07); }
-}
-
 @keyframes revealUp {
-  0% { opacity: 0; transform: translateY(24px); filter: blur(10px); }
+  0% { opacity: 0; transform: translateY(26px); filter: blur(10px); }
   100% { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
@@ -45,11 +40,6 @@
   100% { transform: translate(0,0); }
 }
 
-@keyframes ringSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -67,18 +57,10 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.26) 45%, transparent 60%);
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.22) 45%, transparent 60%);
   transform: translateX(-120%) skewX(-16deg);
-  animation: shimmer 6.8s infinite;
+  animation: shimmer 7s infinite;
   pointer-events: none;
-}
-
-.motion-float {
-  animation: floatSlow 7s var(--ease-soft) infinite;
-}
-
-.motion-drift {
-  animation: drift 14s ease-in-out infinite;
 }
 
 .success-open {
@@ -86,5 +68,5 @@
 }
 
 .screen-enter {
-  animation: revealUp .95s var(--ease-out) both;
+  animation: revealUp 1s var(--ease-out) both;
 }
