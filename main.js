@@ -355,13 +355,17 @@ ${itemsTextReport}
                 })
             });
 
+            // 👇 THIS IS THE NEW DEBUGGING BLOCK 👇
             if (apiResponse.ok) {
-                // Success! Close cart and show success overlay
                 this.closeCartDrawer();
                 document.getElementById("success-overlay").classList.add("open-active");
             } else {
-                alert("Oops! Could not send the order to Telegram. Please check your Bot Token and Chat ID.");
+                // This will catch the exact error Telegram is throwing
+                const errorDetails = await apiResponse.json();
+                console.error("Telegram Error Details:", errorDetails);
+                alert(`Telegram rejected the order! Reason: ${errorDetails.description}`);
             }
+            // 👆 END OF NEW DEBUGGING BLOCK 👆
             
             // Revert button back to normal
             submitBtn.disabled = false;
