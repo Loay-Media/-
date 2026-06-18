@@ -1204,3 +1204,54 @@ body {
         font-size: 1.5rem;
     }
 }
+/* 🌟 CUSTOM HORIZONTAL SCROLL FOR CATEGORIES */
+#nav-pills-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 12px;
+    padding-bottom: 15px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#nav-pills-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+.category-pill-btn {
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+.category-pill-btn:hover, .category-pill-btn.active {
+    box-shadow: 0 0 15px var(--gold-color, #ffd700);
+    transform: translateY(-2px);
+}
+
+/* 🌟 GLOWING SIZE SELECTORS (S, M, L) */
+.size-selector-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.size-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: var(--soft-text-dim, #aaa);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.size-btn:hover {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    border-color: #ffd700;
+    color: #fff;
+}
+.size-btn.active-size {
+    background: var(--gold-color, #ffd700);
+    color: #000;
+    border-color: var(--gold-color, #ffd700);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    transform: scale(1.05);
+}
