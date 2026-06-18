@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البيت السوري - إسماعيلية | تجربة شامية فاخرة</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <div class="ambient-glow-layer">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+    
+    <div id="macro-shutter" class="shutter-overlay">
+        <div class="shutter-wave"></div>
+        <div class="shutter-logo">البيت السوري</div>
+    </div>
+
+    <button id="luxury-cart-fab" class="hidden-fab" onclick="menuApp.openCartDrawer()">
+        <div class="fab-glow-ring"></div>
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span id="global-cart-count">0</span>
+    </button>
+
+    <section id="welcome-screen" class="view-active">
+        <div class="cinematic-bg-wrapper">
+            <div class="bg-pattern-overlay"></div>
+            <div class="bg-image-blend"></div>
+            <div class="bg-gradient-shading"></div>
+        </div>
+        
+        <div class="hero-central-card glass-premium-panel">
+            <div class="arabic-geometric-corner top-right"></div>
+            <div class="arabic-geometric-corner bottom-left"></div>
+            
+            <span class="badge-chip-gold">أصالة الضيافة الشامية</span>
+            <h1 class="main-headline">أهلاً بيكم في <span class="highlight-gold">البيت السوري</span></h1>
+            <p class="supporting-line">أكل يفتح النفس… وطعم يفضل فاكرُه. كل لقمة مصنوعة بحب وشغف ومتبلة على أصولها الفاخرة.</p>
+            
+            <button class="btn-liquid-glow" onclick="menuApp.triggerScreenTransition()">
+                <span class="btn-text">شوف المنيو</span>
+                <span class="btn-shine-sweep"></span>
+            </button>
+        </div>
+    </section>
+
+    <section id="menu-screen" class="view-hidden">
+        
+        <header class="menu-luxury-header">
+            <div class="header-banner-blend"></div>
+            <div class="header-content-box">
+                <span class="badge-chip-terracotta">الأكثر طلباً وإعجاباً</span>
+                <h2>مطبخ الشيف السوري</h2>
+                <p>مكونات طازة يومياً، نكهات مبرومة بالخط الماسي، وجودة مفيش فيها فصال.</p>
+                <div class="trust-features-row">
+                    <div class="feature-tag"><i class="fa-solid fa-fire text-orange"></i> أكل طازة</div>
+                    <div class="feature-tag"><i class="fa-solid fa-award text-gold"></i> طعم أصلي</div>
+                    <div class="feature-tag"><i class="fa-solid fa-truck-fast text-olive"></i> خدمة سريعة</div>
+                </div>
+            </div>
+        </header>
+
+        <nav class="sticky-category-bar" id="category-navbar">
+            <div class="nav-scroll-wrapper" id="nav-pills-container">
+                </div>
+        </nav>
+
+        <main class="menu-sections-wrapper" id="dynamic-menu-injector">
+            </main>
+
+        <section class="supporting-brand-stories">
+            <div class="story-grid-card glass-premium-panel">
+                <h3>حكايتنا الشامية</h3>
+                <p>بدأنا من قلب الشام ونقلنا سر الصنعة للإسماعيلية عشان نقدملكم تجربة طعام فريدة تعيش معاكم. بنختار اللحوم والخضار بعناية فائقة ونستخدم السمن البلدي والتوابل السورية الأصلية.</p>
+            </div>
+            
+            <div class="story-grid-card glass-premium-panel" id="delivery-info-section">
+                <h3>تفاصيل التوصيل والخدمة</h3>
+                <p><i class="fa-solid fa-clock text-gold"></i> <strong>ساعات العمل:</strong> من 12 ظهراً حتى 2 صباحاً</p>
+                <p><i class="fa-solid fa-location-dot text-orange"></i> <strong>مناطق التغطية:</strong> جميع أحياء مدينة الإسماعيلية</p>
+                <p><i class="fa-solid fa-circle-exclamation text-terracotta"></i> <strong>ملحوظة:</strong> الدفع متاح نقداً (كاش) فقط عند الاستلام لضمان راحتكم.</p>
+            </div>
+        </section>
+
+        <footer class="premium-closing-footer">
+            <div class="footer-pattern-bg"></div>
+            <div class="footer-main-grid">
+                <div class="footer-brand-column">
+                    <h4>البيت السوري</h4>
+                    <p>فخامة الطعم الشامي في قلب الإسماعيلية.</p>
+                </div>
+                <div class="footer-links-column">
+                    <h5>تواصل معانا</h5>
+                    <p class="footer-phone"><i class="fa-solid fa-phone"></i> 01023456789</p>
+                    <p class="footer-phone"><i class="fa-solid fa-phone"></i> 01234567890</p>
+                    <div class="footer-socials">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright-bar">
+                <p>&copy; 2026 البيت السوري – جميع الحقوق محفوظة لـ مطور المنصة الفاخرة.</p>
+            </div>
+        </footer>
+    </section>
+
+    <div id="inspect-modal" class="modal-backdrop-layer" onclick="menuApp.closeInspectModal()">
+        <div class="inspect-glass-card" onclick="event.stopPropagation()">
+            <button class="modal-close-trigger" onclick="menuApp.closeInspectModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="inspect-image-header">
+                <img id="inspect-popup-img" src="" alt="Food Dynamic">
+                <div class="inspect-img-shading"></div>
+            </div>
+            <div class="inspect-body-content">
+                <h3 id="inspect-popup-title" class="text-gold">اسم الوجبة</h3>
+                <p id="inspect-popup-desc" class="inspect-ingredients">المكونات الكاملة بالتفصيل</p>
+                <div class="inspect-pricing-row">
+                    <span class="price-label">السعر الصافي</span>
+                    <span id="inspect-popup-price" class="price-value-large">0 ج.م</span>
+                </div>
+                <div class="inspect-action-footer" id="inspect-stepper-mount">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkout-drawer" class="modal-backdrop-layer" onclick="menuApp.closeCartDrawer()">
+        <div class="checkout-sliding-panel" onclick="event.stopPropagation()">
+            <header class="drawer-header-nodes">
+                <h3>سلة الطلبات الفاخرة</h3>
+                <button class="drawer-close-node" onclick="menuApp.closeCartDrawer()"><i class="fa-solid fa-chevron-left"></i></button>
+            </header>
+            
+            <div class="drawer-layout-split">
+                <div class="drawer-items-list-wrapper" id="cart-items-injector">
+                    </div>
+                
+                <div class="drawer-form-payment-wrapper">
+                    <div class="summary-total-glow-box">
+                        <span class="total-label">إجمالي الحساب:</span>
+                        <span class="total-price-tag"><span id="cart-computed-total">0</span> ج.م</span>
+                    </div>
+                    
+                    <form id="order-execution-form" onsubmit="menuApp.handleOrderCompilation(event)">
+                        <div class="premium-input-group">
+                            <label>الاسم الكامل</label>
+                            <div class="input-relative-field">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <input type="text" id="cust-name" required placeholder="اكتب اسمك الثلاثي">
+                            </div>
+                        </div>
+                        
+                        <div class="premium-input-group">
+                            <label>رقم الهاتف المحمول</label>
+                            <div class="input-relative-field">
+                                <i class="fa-solid fa-phone-flip"></i>
+                                <input type="tel" id="cust-phone" required placeholder="رقم متاح للمتابعة">
+                            </div>
+                        </div>
+
+                        <div class="premium-input-group">
+                            <label>البريد الإلكتروني</label>
+                            <div class="input-relative-field">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" id="cust-email" required placeholder="اسم المستخدم@النطاق.com">
+                            </div>
+                        </div>
+
+                        <div class="premium-input-group">
+                            <label>عنوان التوصيل بالتفصيل</label>
+                            <div class="input-relative-field">
+                                <i class="fa-solid fa-map-location"></i>
+                                <input type="text" id="cust-address" required placeholder="المنطقة، الشارع، رقم العمارة والدور">
+                            </div>
+                        </div>
+
+                        <div class="static-cash-indicator">
+                            <div class="cash-icon-glow"><i class="fa-solid fa-money-bill-wave"></i></div>
+                            <div class="cash-text-strings">
+                                <strong>طريقة الدفع المتاحة: كاش</strong>
+                                <p>الدفع نقداً يد بيد عند استلام الطلب الساخن.</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-order-fluid-btn">
+                            <span>تأكيد الأوردر وإرسال الطلب</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-overlay" class="modal-backdrop-layer">
+        <div class="celebration-glass-box glass-premium-panel">
+            <div class="sparkle-emitter">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2>شكراً لاختيارك البيت السوري</h2>
+            <p>طلبك تحت التجهيز دلوقتي.. بنلفهولك بكل حب وهيطير إليك في أسرع وقت ممكن!</p>
+            <button class="btn-liquid-glow back-home-modifier" onclick="menuApp.resetPlatformToHome()">
+                <span>طلب وجبة تانية</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
