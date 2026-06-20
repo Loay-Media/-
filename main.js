@@ -5,7 +5,7 @@ const TELEGRAM_BOT_TOKEN = "8694733166:AAHmXZ4FZ19wRadu_UJZzZEhh8EMjm1GDV8";
 const TELEGRAM_CHAT_ID = "7848525417";     
 
 /**
- * 🍕 EXPANDED MENU DATA (EGYPTIAN ARABIC)
+ * 🍕 EXACT MENU DATA PRESERVED
  */
 const platformCatalogData = [
     {
@@ -119,14 +119,13 @@ const platformCatalogData = [
 ];
 
 /**
- * REUSABLE APPS SYSTEM MANAGEMENT STATE
+ * 🚀 HIGH-PERFORMANCE SYSTEM MANAGEMENT STATE
  */
 const menuApp = {
-    userCartState: {},      // Format: { "pz_01|M": 2 }
-    activeItemSizes: {},    // Format: { "pz_01": "M" }
+    userCartState: {},      
+    activeItemSizes: {},    
 
     initialize() {
-        // Set default selected sizes for all items
         platformCatalogData.forEach(cat => {
             cat.items.forEach(item => {
                 this.activeItemSizes[item.id] = Object.keys(item.prices)[0];
@@ -135,6 +134,7 @@ const menuApp = {
 
         this.renderDomStructureContent();
         this.registerScrollRevealEngine();
+        this.enableDesktopDragScroll(); // 💥 NEW PC GHOST SCROLL INITIALIZATION
     },
 
     getItemData(itemId) {
@@ -143,24 +143,23 @@ const menuApp = {
         return matchedItem;
     },
 
+    // 💥 OPTIMIZED BATCH DOM RENDERING FOR ZERO LAG
     renderDomStructureContent() {
         const pillsContainer = document.getElementById("nav-pills-container");
         const mainInjector = document.getElementById("dynamic-menu-injector");
         
-        if(pillsContainer) pillsContainer.innerHTML = "";
-        if(mainInjector) mainInjector.innerHTML = "";
+        let compiledPillsHtml = "";
+        let compiledSectionsHtml = "";
 
         platformCatalogData.forEach((section, index) => {
-            if (pillsContainer) {
-                const activeClass = index === 0 ? "active" : "";
-                pillsContainer.innerHTML += `
-                    <button class="category-pill-btn ${activeClass}" 
-                            id="pill-${section.id}" 
-                            onclick="menuApp.scrollToTargetCategorySection('${section.id}')">
-                        ${section.title}
-                    </button>
-                `;
-            }
+            const activeClass = index === 0 ? "active" : "";
+            compiledPillsHtml += `
+                <button class="category-pill-btn ${activeClass}" 
+                        id="pill-${section.id}" 
+                        onclick="menuApp.scrollToTargetCategorySection('${section.id}')">
+                    ${section.title}
+                </button>
+            `;
 
             const itemsMarkup = section.items.map(item => {
                 const activeSize = this.activeItemSizes[item.id];
@@ -178,7 +177,7 @@ const menuApp = {
                 }
 
                 return `
-                <div class="food-luxury-tile reveal-hidden-node" onclick="menuApp.openInspectModal('${item.id}')">
+                <div class="food-luxury-tile reveal-hidden-node">
                     <div class="tile-img-container">
                         <img src="${item.img}" alt="${item.name}" loading="lazy">
                         <div class="tile-shading-lens"></div>
@@ -188,7 +187,7 @@ const menuApp = {
                         <p class="tile-ingredients-text">${item.description}</p>
                         ${sizesHtml}
                         <div class="tile-interactive-footer" onclick="event.stopPropagation()">
-                            <span class="tile-price-span" id="price-${item.id}">${currentPrice} ج.م</span>
+                            <span class="tile-price-span text-gold" id="price-${item.id}">${currentPrice} ج.م</span>
                             <div class="stepper-fluid-shell" id="stepper-shell-${item.id}">
                                 ${this.generateStepperMarkup(item.id)}
                             </div>
@@ -198,19 +197,55 @@ const menuApp = {
                 `;
             }).join('');
 
-            if (mainInjector) {
-                mainInjector.innerHTML += `
-                    <section id="${section.id}" class="menu-categorical-group">
-                        <div class="category-section-title-box">
-                            <h3>${section.title}</h3>
-                            <p>${section.description}</p>
-                        </div>
-                        <div class="products-scaffold-grid">
-                            ${itemsMarkup}
-                        </div>
-                    </section>
-                `;
-            }
+            compiledSectionsHtml += `
+                <section id="${section.id}" class="menu-categorical-group">
+                    <div class="category-section-title-box">
+                        <h3>${section.title}</h3>
+                        <p>${section.description}</p>
+                    </div>
+                    <div class="products-scaffold-grid">
+                        ${itemsMarkup}
+                    </div>
+                </section>
+            `;
+        });
+
+        if (pillsContainer) pillsContainer.innerHTML = compiledPillsHtml;
+        if (mainInjector) mainInjector.innerHTML = compiledSectionsHtml;
+    },
+
+    // 💥 NEW: PC MOUSE DRAG TO SCROLL (GHOST SCROLLBAR)
+    enableDesktopDragScroll() {
+        const slider = document.getElementById('nav-pills-container');
+        if(!slider) return;
+        
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active-drag');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        
+        slider.addEventListener('mouseleave', () => { 
+            isDown = false; 
+            slider.classList.remove('active-drag'); 
+        });
+        
+        slider.addEventListener('mouseup', () => { 
+            isDown = false; 
+            slider.classList.remove('active-drag'); 
+        });
+        
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll speed multiplier
+            slider.scrollLeft = scrollLeft - walk;
         });
     },
 
@@ -218,7 +253,6 @@ const menuApp = {
         if(event) event.stopPropagation();
         this.activeItemSizes[itemId] = newSize;
 
-        // Visual update for the buttons
         const btnContainer = document.getElementById(`sizes-${itemId}`);
         if(btnContainer) {
             btnContainer.querySelectorAll('.size-btn').forEach(btn => {
@@ -227,12 +261,10 @@ const menuApp = {
             });
         }
 
-        // Update the price
         const item = this.getItemData(itemId);
         const priceNode = document.getElementById(`price-${itemId}`);
         if(priceNode) priceNode.innerText = `${item.prices[newSize]} ج.م`;
 
-        // Update Stepper to reflect cart quantity of the NEW size
         this.syncStateInterfaceViews(itemId);
     },
 
@@ -311,18 +343,20 @@ const menuApp = {
         }, 2200);
     },
 
+    // 💥 SMOOTHER 60FPS INTERSECTION OBSERVER
     registerScrollRevealEngine() {
         const targetObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("reveal-visible-node");
+                    targetObserver.unobserve(entry.target); // Stop observing once revealed for better performance
                 }
             });
-        }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
         setTimeout(() => {
             document.querySelectorAll(".reveal-hidden-node").forEach(node => targetObserver.observe(node));
-        }, 1000);
+        }, 500);
     },
 
     triggerDelayedVisibilityReveal() {
@@ -330,27 +364,16 @@ const menuApp = {
         structuralElements.forEach((node, index) => {
             setTimeout(() => {
                 node.classList.add("reveal-visible-node");
-            }, index * 90);
+            }, index * 80);
         });
     },
 
     scrollToTargetCategorySection(sectionId) {
         const element = document.getElementById(sectionId);
-        const container = document.getElementById("nav-pills-container");
-        
         if (element) {
             const computationalOffset = element.offsetTop - 90;
             window.scrollTo({ top: computationalOffset, behavior: "smooth" });
         }
-    },
-
-    openInspectModal(itemId) {
-        // Modal logic can remain basic or you can expand it later. 
-        // We recommend adding directly from the tile with the new size buttons!
-    },
-
-    closeInspectModal() {
-        document.getElementById("inspect-modal").classList.remove("open-active");
     },
 
     openCartDrawer() {
@@ -377,14 +400,12 @@ const menuApp = {
                 const lineAccumulatedTotal = explicitQty * unitPrice;
                 computedGrandTotal += lineAccumulatedTotal;
                 
-                // Name format logic: e.g. "بيتزا مارجريتا (وسط)"
-                const sizeLabel = sizeCode === 'default' ? '' : `<span style="color:var(--gold-color); font-size:0.8rem;">(${item.sizeNames[sizeCode]})</span>`;
+                const sizeLabel = sizeCode === 'default' ? '' : `<span style="color:var(--gold-solid); font-size:0.8rem;">(${item.sizeNames[sizeCode]})</span>`;
 
-                // Temporarily swap active size to render correct stepper for the drawer
                 const originalActiveSize = this.activeItemSizes[itemId];
                 this.activeItemSizes[itemId] = sizeCode;
                 const stepperHtml = this.generateStepperMarkup(itemId);
-                this.activeItemSizes[itemId] = originalActiveSize; // swap back
+                this.activeItemSizes[itemId] = originalActiveSize; 
 
                 generatedHtml += `
                     <div class="cart-row-item">
@@ -404,7 +425,7 @@ const menuApp = {
         }
 
         if(container) {
-            container.innerHTML = generatedHtml || `<p style="text-align:center; padding: 3rem; color: var(--soft-text-dim);">السلة فارغة حالياً.</p>`;
+            container.innerHTML = generatedHtml || `<p style="text-align:center; padding: 3rem; color: #aaa;">السلة فارغة حالياً.</p>`;
         }
         if(document.getElementById("cart-computed-total")) {
             document.getElementById("cart-computed-total").innerText = computedGrandTotal;
@@ -412,7 +433,7 @@ const menuApp = {
     },
 
     /**
-     * 🔥 TELEGRAM CHECKOUT INTEGRATION (EGYPTIAN ARABIC)
+     * 🔥 PERFECTED TELEGRAM FORMATTING (ARABIC RTL FIX)
      */
     async handleOrderCompilation(event) {
         event.preventDefault(); 
@@ -442,7 +463,8 @@ const menuApp = {
                 calculatedTotalSum += rowTotalPrice;
                 
                 const arabicSizeText = sizeCode === 'default' ? '' : `(${item.sizeNames[sizeCode]})`;
-                itemsTextReport += `• ${quantityOrdered}x ${item.name} ${arabicSizeText} - ${rowTotalPrice} ج.م\n`;
+                // 💥 RTL FIX: Perfect Arabic structure reading right-to-left
+                itemsTextReport += `• ${quantityOrdered} ${item.name} ${arabicSizeText} بـ ${rowTotalPrice} ج.م\n`;
             }
         }
 
@@ -533,7 +555,6 @@ window.addEventListener("scroll", () => {
         button.classList.remove("active");
         if (button.getAttribute("id") === `pill-${currentFocusId}`) {
             button.classList.add("active");
-            // Automatically scrolls the top pill container so the active category is visible
             button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
         }
     });
