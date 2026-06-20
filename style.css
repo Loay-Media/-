@@ -1255,3 +1255,104 @@ body {
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
     transform: scale(1.05);
 }
+/* 🌟 PREMIUM GLASSMORPHISM & 3D HOVER EFFECTS */
+:root {
+    --gold-glow: rgba(255, 215, 0, 0.4);
+    --gold-solid: #ffd700;
+    --dark-surface: #1a1a1a;
+}
+
+.food-luxury-tile {
+    background: linear-gradient(145deg, #1e1e1e, #141414);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
+    will-change: transform, box-shadow;
+}
+
+.food-luxury-tile:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px var(--gold-glow);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.tile-img-container img {
+    transition: transform 0.6s ease;
+}
+
+.food-luxury-tile:hover .tile-img-container img {
+    transform: scale(1.1);
+}
+
+/* 🌟 PC DRAG-TO-SCROLL STYLING */
+#nav-pills-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 12px;
+    padding-bottom: 15px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    cursor: grab; /* PC Hand Cursor */
+    user-select: none; /* Prevents text highlighting while dragging */
+}
+#nav-pills-container.active-drag {
+    cursor: grabbing;
+    scroll-behavior: auto; /* Disables smooth scroll temporarily for 1:1 drag accuracy */
+}
+#nav-pills-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 🌟 ULTIMATE GLOWING CATEGORY & SIZE BUTTONS */
+.category-pill-btn {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+.category-pill-btn.active, .category-pill-btn:hover {
+    background: var(--gold-solid);
+    color: #000;
+    box-shadow: 0 0 20px var(--gold-glow);
+    transform: translateY(-2px);
+}
+
+.size-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: #aaa;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.size-btn:hover {
+    box-shadow: 0 0 15px var(--gold-glow);
+    border-color: var(--gold-solid);
+    color: #fff;
+}
+.size-btn.active-size {
+    background: var(--gold-solid);
+    color: #000;
+    border-color: var(--gold-solid);
+    box-shadow: 0 0 20px var(--gold-glow);
+    transform: scale(1.08);
+}
+
+/* 🌟 60FPS REVEAL ANIMATIONS */
+.reveal-hidden-node {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal-visible-node {
+    opacity: 1;
+    transform: translateY(0);
+}
